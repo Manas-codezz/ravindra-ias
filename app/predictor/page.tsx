@@ -25,48 +25,51 @@ export default function PredictorPage() {
     const prelims = parseInt(prelimsMarks) || 0;
     const mains = parseInt(mainsMarks) || 0;
 
-    if (prelims < 0 || mains < 0 || prelims > 200 || mains > 1000) {
-      return;
-    }
+    if (prelims > 200) {
+    alert("Prelims marks cannot exceed 200");
+    return;
+  }
+
+  if (prelims < 0 || mains < 0) {
+    alert("Marks cannot be negative");
+    return;
+  }
+
+  if (mains > 1000) {
+    alert("Mains marks cannot exceed 1000");
+    return;
+  }
+    let rankRange = '';
+    let recommendation = '';
+    let category = '';
 
     setIsCalculating(true);
 
-    setTimeout(() => {
-      const score = prelims * 0.3 + mains * 0.7;
-      const subjectBoost = subjects.find(s => s.value === selectedSubject)?.boost || 0;
-      const finalScore = score + subjectBoost;
-
-      let rankRange = '';
-      let category = '';
-      let recommendation = '';
-      let color = '';
-
-      if (finalScore >= 850) {
-        rankRange = 'AIR < 50';
-        category = 'Excellent';
-        recommendation = 'Outstanding performance! You are on track for a top rank. Focus on interview preparation and maintaining consistency in your answers.';
-        color = 'from-green-500 to-emerald-600';
-      } else if (finalScore >= 750) {
-        rankRange = 'AIR < 200';
-        category = 'Very Strong';
-        recommendation = 'Great score! You have strong chances. Work on refining your answer writing skills and strengthen any weak areas to secure a top 100 rank.';
-        color = 'from-blue-500 to-cyan-600';
-      } else if (finalScore >= 650) {
-        rankRange = 'AIR < 500';
-        category = 'Good';
-        recommendation = 'Good performance! Focus on answer writing practice and current affairs analysis. Regular mock tests will help improve your ranking significantly.';
-        color = 'from-cyan-500 to-teal-600';
-      } else if (finalScore >= 550) {
-        rankRange = 'Borderline';
-        category = 'Needs Improvement';
-        recommendation = 'You need to strengthen your fundamentals. Focus on conceptual clarity, regular revision, and practice more mock tests to improve your score.';
-        color = 'from-orange-500 to-amber-600';
-      } else {
-        rankRange = 'Low Chances';
-        category = 'Focus on Basics';
-        recommendation = 'Your current preparation needs significant improvement. Consider joining a structured coaching program and focus on building strong fundamentals.';
-        color = 'from-red-500 to-rose-600';
-      }
+    if (totalScore >= 950) {
+      rankRange = '1 - 50';
+      category = 'Outstanding';
+      recommendation = 'Exceptional performance! Focus on interview preparation and maintain consistency.';
+    } else if (totalScore >= 850) {
+      rankRange = '51 - 150';
+      category = 'Excellent';
+      recommendation = 'Great score! Work on refining answers and strengthen weak areas for top ranks.';
+    } else if (totalScore >= 750) {
+      rankRange = '151 - 350'; 
+      category = 'Very Good';
+      recommendation = 'Good performance! Focus on answer writing and current affairs to improve further.';
+    } else if (totalScore >= 650) {
+      rankRange = '351 - 600';
+      category = 'Good';
+      recommendation = 'Decent score. Strengthen conceptual clarity and practice more mock tests.';
+    } else if (totalScore >= 550) {
+      rankRange = '601 - 1000';
+      category: 'Average';
+      recommendation = 'Keep working hard. Focus on fundamentals and regular revision is key.';
+    } else {
+      rankRange = '1000+';
+      category = 'Needs Improvement';
+      recommendation = 'Requires focused preparation. Consider joining a structured coaching program.';
+    }
 
       setPrediction({
         rankRange,
@@ -106,7 +109,8 @@ export default function PredictorPage() {
               UPSC Rank <span className="text-gradient">Predictor</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Get an estimated rank based on your exam performance and receive personalized recommendations
+              Get an estimated rank based on your mock test performance and
+              receive personalized recommendations
             </p>
           </motion.div>
 
@@ -161,29 +165,25 @@ export default function PredictorPage() {
                     <label className="block text-sm font-medium text-gray-300 mb-2">
                       Optional Subject
                     </label>
-                    <div className="relative">
-                      <select
-                        value={selectedSubject}
-                        onChange={(e) => setSelectedSubject(e.target.value)}
-                        className="w-full px-4 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 focus:border-[#6366F1] transition-all outline-none text-white appearance-none cursor-pointer"
-                        style={{
-                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundPosition: 'right 12px center',
-                          backgroundSize: '20px',
-                        }}
-                      >
-                        {subjects.map((subject) => (
-                          <option
-                            key={subject.value}
-                            value={subject.value}
-                            className="bg-[#1a1f2e] text-white"
-                          >
-                            {subject.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                    <select
+                      value={selectedSubject}
+                      onChange={(e) => setSelectedSubject(e.target.value)}
+                      className="w-full px-4 py-3 glass rounded-xl border border-white/10 focus:border-[#6366F1] transition-all outline-none text-white"
+                    >
+                      <option value="" className="bg-gray-900 text-white">
+                        Select a subject
+                      </option>
+
+                      {subjects.map((subject) => (
+                        <option
+                          key={subject}
+                          value={subject}
+                          className="bg-gray-900 text-white"
+                        >
+                          {subject}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -256,17 +256,41 @@ export default function PredictorPage() {
                     </div>
                   </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="glass rounded-3xl p-6 border border-white/10"
-                  >
-                    <div className="flex items-center space-x-3 mb-4">
-                      <Target className="w-6 h-6 text-[#22D3EE]" />
-                      <h3 className="text-lg font-bold text-white">
-                        Personalized Recommendation
-                      </h3>
+                <div className="glass rounded-3xl p-8 border border-white/10">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <Target className="w-6 h-6 text-[#22D3EE]" />
+                    <h3 className="text-xl font-bold text-white">
+                      Personalized Recommendation
+                    </h3>
+                  </div>
+                  <p className="text-gray-300 leading-relaxed">
+                    {prediction.recommendation}
+                  </p>
+                </div>
+
+                <div className="glass rounded-3xl p-8 border border-white/10">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <TrendingUp className="w-6 h-6 text-[#6366F1]" />
+                    <h3 className="text-xl font-bold text-white">Next Steps</h3>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-white/5 rounded-xl">
+                      <h4 className="font-semibold text-white mb-2">
+                        Answer Writing
+                      </h4>
+                      <p className="text-sm text-gray-400">
+                        Practice daily answer writing to improve quality and
+                        speed
+                      </p>
+                    </div>
+                    <div className="p-4 bg-white/5 rounded-xl">
+                      <h4 className="font-semibold text-white mb-2">
+                        Mock Tests
+                      </h4>
+                      <p className="text-sm text-gray-400">
+                        Take regular full-length mock tests for better
+                        preparation
+                      </p>
                     </div>
                     <p className="text-gray-300 leading-relaxed">
                       {prediction.recommendation}
@@ -321,11 +345,17 @@ export default function PredictorPage() {
                     </div>
                   </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="text-center text-sm text-gray-500 px-4"
+                <div className="glass rounded-3xl p-8 text-center border border-white/10">
+                  <h3 className="text-2xl font-bold mb-4">
+                    Want to{" "}
+                    <span className="text-gradient">Improve Your Score?</span>
+                  </h3>
+                  <p className="text-gray-400 mb-6">
+                    Join our comprehensive coaching program for expert guidance
+                  </p>
+                  <a
+                    href="/courses"
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#6366F1] to-[#22D3EE] rounded-xl text-white font-semibold hover:scale-105 transition-transform glow"
                   >
                     This is an estimated prediction based on sample logic and does not guarantee actual UPSC results.
                   </motion.div>

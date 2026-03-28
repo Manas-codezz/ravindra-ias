@@ -1,9 +1,9 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Menu, X, GraduationCap } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import image from "next/image";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, GraduationCap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,18 +13,18 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/courses', label: 'Courses' },
-    { href: '/results', label: 'Results' },
-    { href: '/resources', label: 'Resources' },
-    { href: '/predictor', label: 'Rank Predictor' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+    { href: "/", label: "Home" },
+    { href: "/courses", label: "Courses" },
+    { href: "/results", label: "Results" },
+    { href: "/resources", label: "Resources" },
+    { href: "/predictor", label: "Rank Predictor" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -32,7 +32,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass shadow-lg' : 'bg-transparent'
+        isScrolled ? "glass shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +46,8 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-center space-x-1">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -58,15 +59,16 @@ export default function Navbar() {
             ))}
             <Link
               href="/contact"
-              className="ml-4 px-6 py-2 bg-gradient-to-r from-[#6366F1] to-[#22D3EE] rounded-lg text-white font-semibold hover:scale-105 transition-transform glow"
+              className="px-6 py-2 bg-gradient-to-r from-[#6366F1] to-[#22D3EE] rounded-lg text-white font-semibold hover:scale-105 transition-transform glow"
             >
               Enroll Now
             </Link>
           </div>
 
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg glass-hover"
+            className="p-2 rounded-lg glass-hover lg:hidden"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -77,11 +79,12 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden glass border-t border-white/10"
           >
@@ -91,7 +94,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+                  className="block px-4 py-3 rounded-lg text-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-white/10 transition-all"
                 >
                   {link.label}
                 </Link>

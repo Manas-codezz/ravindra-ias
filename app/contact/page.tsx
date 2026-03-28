@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    course: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    course: "",
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
   const courses = [
-    'Foundation Course',
-    'Prelims Intensive',
-    'Prelims + Mains Comprehensive',
-    'Advanced Mains Program',
-    'Interview Preparation',
-    'Optional Subject',
+    "Foundation Course",
+    "Prelims Intensive",
+    "Prelims + Mains Comprehensive",
+    "Advanced Mains Program",
+    "Interview Preparation",
+    "Optional Subject",
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,17 +31,19 @@ export default function ContactPage() {
     setTimeout(() => {
       setSubmitted(false);
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        course: '',
-        message: '',
+        name: "",
+        email: "",
+        phone: "",
+        course: "",
+        message: "",
       });
     }, 3000);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     setFormData({
       ...formData,
@@ -52,18 +54,18 @@ export default function ContactPage() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Visit Us',
-      details: ['123 Rajaji Marg, Mukherjee Nagar', 'New Delhi - 110009, India'],
+      title: "Gwalior Branch",
+      details: ["Krishna Tower,", "Phoolbagh Chauraha"],
     },
     {
       icon: Phone,
-      title: 'Call Us',
-      details: ['+91 98765 43210', '+91 98765 43211'],
+      title: "Call Us",
+      details: ["+91 9953101176", "+91 8700170483"],
     },
     {
       icon: Mail,
-      title: 'Email Us',
-      details: ['info@ravindraias.com', 'admissions@ravindraias.com'],
+      title: "Email Us",
+      details: ["ravindrasiasdelhi@gmail.com"],
     },
   ];
 
@@ -82,7 +84,8 @@ export default function ContactPage() {
               Get in <span className="text-gradient">Touch</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              Have questions? We'd love to hear from you. Send us a message and
+              we'll respond as soon as possible.
             </p>
           </motion.div>
 
@@ -93,7 +96,9 @@ export default function ContactPage() {
               transition={{ delay: 0.2 }}
             >
               <div className="glass rounded-3xl p-8 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">
+                  Send us a Message
+                </h2>
 
                 {submitted ? (
                   <motion.div
@@ -102,9 +107,12 @@ export default function ContactPage() {
                     className="text-center py-12"
                   >
                     <CheckCircle className="w-20 h-20 mx-auto text-[#22D3EE] mb-4" />
-                    <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      Thank You!
+                    </h3>
                     <p className="text-gray-400">
-                      We've received your message and will get back to you shortly.
+                      We've received your message and will get back to you
+                      shortly.
                     </p>
                   </motion.div>
                 ) : (
@@ -206,7 +214,9 @@ export default function ContactPage() {
               className="space-y-6"
             >
               <div className="glass rounded-3xl p-8 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">
+                  Contact Information
+                </h2>
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => {
                     const Icon = info.icon;
@@ -216,7 +226,9 @@ export default function ContactPage() {
                           <Icon className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white mb-1">{info.title}</h3>
+                          <h3 className="font-semibold text-white mb-1">
+                            {info.title}
+                          </h3>
                           {info.details.map((detail, idx) => (
                             <p key={idx} className="text-gray-400 text-sm">
                               {detail}
@@ -230,7 +242,9 @@ export default function ContactPage() {
               </div>
 
               <div className="glass rounded-3xl p-8 border border-white/10">
-                <h3 className="text-xl font-bold text-white mb-4">Office Hours</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Office Hours
+                </h3>
                 <div className="space-y-3 text-gray-300">
                   <div className="flex justify-between">
                     <span>Monday - Friday</span>
@@ -248,7 +262,9 @@ export default function ContactPage() {
               </div>
 
               <div className="glass rounded-3xl p-8 border border-white/10">
-                <h3 className="text-xl font-bold text-white mb-4">Quick Links</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Quick Links
+                </h3>
                 <div className="space-y-3">
                   <a
                     href="/courses"
