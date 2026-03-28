@@ -25,6 +25,20 @@ export default function PredictorPage() {
     const prelims = parseInt(prelimsMarks) || 0;
     const mains = parseInt(mainsMarks) || 0;
 
+    if (prelims > 200) {
+    alert("Prelims marks cannot exceed 200");
+    return;
+  }
+
+  if (prelims < 0 || mains < 0) {
+    alert("Marks cannot be negative");
+    return;
+  }
+
+  if (mains > 1000) {
+    alert("Mains marks cannot exceed 1000");
+    return;
+  }
     let rankRange = '';
     let recommendation = '';
     let category = '';
@@ -40,7 +54,7 @@ export default function PredictorPage() {
       category = 'Excellent';
       recommendation = 'Great score! Work on refining answers and strengthen weak areas for top ranks.';
     } else if (totalScore >= 750) {
-      rankRange = '151 - 350';
+      rankRange = '151 - 350'; 
       category = 'Very Good';
       recommendation = 'Good performance! Focus on answer writing and current affairs to improve further.';
     } else if (totalScore >= 650) {
@@ -91,7 +105,8 @@ export default function PredictorPage() {
               UPSC Rank <span className="text-gradient">Predictor</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Get an estimated rank based on your mock test performance and receive personalized recommendations
+              Get an estimated rank based on your mock test performance and
+              receive personalized recommendations
             </p>
           </motion.div>
 
@@ -150,9 +165,16 @@ export default function PredictorPage() {
                       onChange={(e) => setSelectedSubject(e.target.value)}
                       className="w-full px-4 py-3 glass rounded-xl border border-white/10 focus:border-[#6366F1] transition-all outline-none text-white"
                     >
-                      <option value="">Select a subject</option>
+                      <option value="" className="bg-gray-900 text-white">
+                        Select a subject
+                      </option>
+
                       {subjects.map((subject) => (
-                        <option key={subject} value={subject}>
+                        <option
+                          key={subject}
+                          value={subject}
+                          className="bg-gray-900 text-white"
+                        >
                           {subject}
                         </option>
                       ))}
@@ -221,9 +243,7 @@ export default function PredictorPage() {
                 <div className="glass rounded-3xl p-8 border border-white/10">
                   <div className="flex items-center space-x-3 mb-6">
                     <TrendingUp className="w-6 h-6 text-[#6366F1]" />
-                    <h3 className="text-xl font-bold text-white">
-                      Next Steps
-                    </h3>
+                    <h3 className="text-xl font-bold text-white">Next Steps</h3>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="p-4 bg-white/5 rounded-xl">
@@ -231,7 +251,8 @@ export default function PredictorPage() {
                         Answer Writing
                       </h4>
                       <p className="text-sm text-gray-400">
-                        Practice daily answer writing to improve quality and speed
+                        Practice daily answer writing to improve quality and
+                        speed
                       </p>
                     </div>
                     <div className="p-4 bg-white/5 rounded-xl">
@@ -239,7 +260,8 @@ export default function PredictorPage() {
                         Mock Tests
                       </h4>
                       <p className="text-sm text-gray-400">
-                        Take regular full-length mock tests for better preparation
+                        Take regular full-length mock tests for better
+                        preparation
                       </p>
                     </div>
                     <div className="p-4 bg-white/5 rounded-xl">
@@ -263,7 +285,8 @@ export default function PredictorPage() {
 
                 <div className="glass rounded-3xl p-8 text-center border border-white/10">
                   <h3 className="text-2xl font-bold mb-4">
-                    Want to <span className="text-gradient">Improve Your Score?</span>
+                    Want to{" "}
+                    <span className="text-gradient">Improve Your Score?</span>
                   </h3>
                   <p className="text-gray-400 mb-6">
                     Join our comprehensive coaching program for expert guidance

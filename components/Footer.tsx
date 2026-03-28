@@ -1,26 +1,35 @@
-import Link from 'next/link';
-import { GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import Link from "next/link";
+import {
+  GraduationCap,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 
 export default function Footer() {
   const quickLinks = [
-    { href: '/courses', label: 'Courses' },
-    { href: '/results', label: 'Results' },
-    { href: '/resources', label: 'Resources' },
-    { href: '/predictor', label: 'Rank Predictor' },
+    { href: "/courses", label: "Courses" },
+    { href: "/results", label: "Results" },
+    { href: "/resources", label: "Resources" },
+    { href: "/predictor", label: "Rank Predictor" },
   ];
 
   const resources = [
-    { href: '/resources', label: 'Study Material' },
-    { href: '/resources', label: 'Current Affairs' },
-    { href: '/resources', label: 'Test Series' },
-    { href: '/resources', label: 'Previous Papers' },
+    { href: "/resources", label: "Study Material" },
+    { href: "/resources", label: "Current Affairs" },
+    { href: "/resources", label: "Test Series" },
+    { href: "/resources", label: "Previous Papers" },
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Youtube, href: '#', label: 'Youtube' },
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Youtube, href: "#", label: "Youtube" },
   ];
 
   return (
@@ -37,7 +46,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-gray-400 text-sm mb-4">
-              India's most trusted UPSC coaching institute. Transform your dreams into reality with our proven methodology.
+              India's most trusted UPSC coaching institute. Transform your
+              dreams into reality with our proven methodology.
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((social) => (
@@ -90,17 +100,23 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
                 <MapPin className="w-5 h-5 text-[#22D3EE] flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">
-                  123 Rajaji Marg, Mukherjee Nagar, Delhi - 110009
-                </span>
+                <div className="text-gray-400 text-sm">
+                  <p className="font-semibold text-white mb-1">Gwalior</p>
+                  <p>Krishna Tower, Phoolbagh Chauraha</p>
+                </div>
               </li>
-              <li className="flex items-center space-x-2">
-                <Phone className="w-5 h-5 text-[#22D3EE]" />
-                <span className="text-gray-400 text-sm">+91 98765 43210</span>
+              <li className="flex items-start space-x-2">
+                <Phone className="w-5 h-5 text-[#22D3EE] flex-shrink-0 mt-0.5" />
+                <div className="text-gray-400 text-sm">
+                  <p>+91 9953101176</p>
+                  <p>+91 8700170483</p>
+                </div>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-5 h-5 text-[#22D3EE]" />
-                <span className="text-gray-400 text-sm">info@ravindraias.com</span>
+                <span className="text-gray-400 text-sm">
+                  ravindrasiasdelhi@gmail.com
+                </span>
               </li>
             </ul>
           </div>
